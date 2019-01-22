@@ -20,7 +20,7 @@
  *
  * @see https://developers.google.com/drive/web/handle-errors#implementing_exponential_backoff
  */
-class Google_Task_Runner
+class AcordTravel_Task_Runner
 {
   const TASK_RETRY_NEVER = 0;
   const TASK_RETRY_ONCE = 1;
@@ -86,7 +86,7 @@ class Google_Task_Runner
    * @param string $name The name of the current task (used for logging)
    * @param callable $action The task to run and possibly retry
    * @param array $arguments The task arguments
-   * @throws Google_Task_Exception when misconfigured
+   * @throws AcordTravel_Task_Exception when misconfigured
    */
   public function __construct(
       $config,
@@ -96,7 +96,7 @@ class Google_Task_Runner
   ) {
     if (isset($config['initial_delay'])) {
       if ($config['initial_delay'] < 0) {
-        throw new Google_Task_Exception(
+        throw new AcordTravel_Task_Exception(
             'Task configuration `initial_delay` must not be negative.'
         );
       }
@@ -106,7 +106,7 @@ class Google_Task_Runner
 
     if (isset($config['max_delay'])) {
       if ($config['max_delay'] <= 0) {
-        throw new Google_Task_Exception(
+        throw new AcordTravel_Task_Exception(
             'Task configuration `max_delay` must be greater than 0.'
         );
       }
@@ -116,7 +116,7 @@ class Google_Task_Runner
 
     if (isset($config['factor'])) {
       if ($config['factor'] <= 0) {
-        throw new Google_Task_Exception(
+        throw new AcordTravel_Task_Exception(
             'Task configuration `factor` must be greater than 0.'
         );
       }
@@ -126,7 +126,7 @@ class Google_Task_Runner
 
     if (isset($config['jitter'])) {
       if ($config['jitter'] <= 0) {
-        throw new Google_Task_Exception(
+        throw new AcordTravel_Task_Exception(
             'Task configuration `jitter` must be greater than 0.'
         );
       }
@@ -136,7 +136,7 @@ class Google_Task_Runner
 
     if (isset($config['retries'])) {
       if ($config['retries'] < 0) {
-        throw new Google_Task_Exception(
+        throw new AcordTravel_Task_Exception(
             'Task configuration `retries` must not be negative.'
         );
       }
@@ -144,7 +144,7 @@ class Google_Task_Runner
     }
 
     if (!is_callable($action)) {
-        throw new Google_Task_Exception(
+        throw new AcordTravel_Task_Exception(
             'Task argument `$action` must be a valid callable.'
         );
     }
@@ -167,14 +167,14 @@ class Google_Task_Runner
    * Runs the task and (if applicable) automatically retries when errors occur.
    *
    * @return mixed
-   * @throws Google_Task_Retryable on failure when no retries are available.
+   * @throws AcordTravel_Task_Retryable on failure when no retries are available.
    */
   public function run()
   {
     while ($this->attempt()) {
       try {
         return call_user_func_array($this->action, $this->arguments);
-      } catch (Google_Service_Exception $exception) {
+      } catch (AcordTravel_Service_Exception $exception) {
         $allowedRetries = $this->allowedRetries(
             $exception->getCode(),
             $exception->getErrors()

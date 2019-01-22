@@ -13,7 +13,7 @@ use Psr\Cache\CacheItemPoolInterface;
 /**
 *
 */
-class Google_AuthHandler_Guzzle5AuthHandler
+class AcordTravel_AuthHandler_Guzzle5AuthHandler
 {
   protected $cache;
   protected $cacheConfig;

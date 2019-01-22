@@ -25,16 +25,16 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * This class implements the RESTful transport of apiServiceRequest()'s
  */
-class Google_Http_REST
+class AcordTravel_Http_REST
 {
   /**
    * Executes a Psr\Http\Message\RequestInterface and (if applicable) automatically retries
    * when errors occur.
    *
-   * @param Google_Client $client
+   * @param AcordTravel_Client $client
    * @param Psr\Http\Message\RequestInterface $req
    * @return array decoded result
-   * @throws Google_Service_Exception on server side error (ie: not authenticated,
+   * @throws AcordTravel_Service_Exception on server side error (ie: not authenticated,
    *  invalid or malformed post body, invalid url)
    */
   public static function execute(
@@ -44,7 +44,7 @@ class Google_Http_REST
       $config = array(),
       $retryMap = null
   ) {
-    $runner = new Google_Task_Runner(
+    $runner = new AcordTravel_Task_Runner(
         $config,
         sprintf('%s %s', $request->getMethod(), (string) $request->getUri()),
         array(get_class(), 'doExecute'),
@@ -61,10 +61,10 @@ class Google_Http_REST
   /**
    * Executes a Psr\Http\Message\RequestInterface
    *
-   * @param Google_Client $client
+   * @param AcordTravel_Client $client
    * @param Psr\Http\Message\RequestInterface $request
    * @return array decoded result
-   * @throws Google_Service_Exception on server side error (ie: not authenticated,
+   * @throws AcordTravel_Service_Exception on server side error (ie: not authenticated,
    *  invalid or malformed post body, invalid url)
    */
   public static function doExecute(ClientInterface $client, RequestInterface $request, $expectedClass = null)
@@ -97,7 +97,7 @@ class Google_Http_REST
   /**
    * Decode an HTTP Response.
    * @static
-   * @throws Google_Service_Exception
+   * @throws AcordTravel_Service_Exception
    * @param Psr\Http\Message\RequestInterface $response The http response to be decoded.
    * @param Psr\Http\Message\ResponseInterface $response
    * @return mixed|null
@@ -115,7 +115,7 @@ class Google_Http_REST
       $body = (string) $response->getBody();
 
       // Check if we received errors, and add those to the Exception for convenience
-      throw new Google_Service_Exception($body, $code, null, self::getResponseErrors($body));
+      throw new AcordTravel_Service_Exception($body, $code, null, self::getResponseErrors($body));
     }
 
     // Ensure we only pull the entire body into memory if the request is not

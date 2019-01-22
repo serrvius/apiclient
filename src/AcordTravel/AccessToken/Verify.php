@@ -29,7 +29,7 @@ use Stash\Pool;
  * Wrapper around Google Access Tokens which provides convenience functions
  *
  */
-class Google_AccessToken_Verify
+class AcordTravel_AccessToken_Verify
 {
   const FEDERATED_SIGNON_CERT_URL = 'https://www.googleapis.com/oauth2/v3/certs';
   const OAUTH2_ISSUER = 'accounts.google.com';
@@ -140,7 +140,7 @@ class Google_AccessToken_Verify
    * Retrieve and cache a certificates file.
    *
    * @param $url string location
-   * @throws Google_Exception
+   * @throws AcordTravel_Exception
    * @return array certificates
    */
   private function retrieveCertsFromLocation($url)
@@ -148,7 +148,7 @@ class Google_AccessToken_Verify
     // If we're retrieving a local file, just grab it.
     if (0 !== strpos($url, 'http')) {
       if (!$file = file_get_contents($url)) {
-        throw new Google_Exception(
+        throw new AcordTravel_Exception(
             "Failed to retrieve verification certificates: '" .
             $url . "'."
         );
@@ -162,7 +162,7 @@ class Google_AccessToken_Verify
     if ($response->getStatusCode() == 200) {
       return json_decode((string) $response->getBody(), true);
     }
-    throw new Google_Exception(
+    throw new AcordTravel_Exception(
         sprintf(
             'Failed to retrieve verification certificates: "%s".',
             $response->getBody()->getContents()

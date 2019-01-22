@@ -24,7 +24,7 @@ use Psr\Http\Message\RequestInterface;
  * Manage large file uploads, which may be media but can be any type
  * of sizable data.
  */
-class Google_Http_MediaFileUpload
+class AcordTravel_Http_MediaFileUpload
 {
   const UPLOAD_MEDIA_TYPE = 'media';
   const UPLOAD_MULTIPART_TYPE = 'multipart';
@@ -51,7 +51,7 @@ class Google_Http_MediaFileUpload
   /** @var int $progress */
   private $progress;
 
-  /** @var Google_Client */
+  /** @var AcordTravel_Client */
   private $client;
 
   /** @var Psr\Http\Message\RequestInterface */
@@ -74,7 +74,7 @@ class Google_Http_MediaFileUpload
    * only used if resumable=True
    */
   public function __construct(
-      Google_Client $client,
+      AcordTravel_Client $client,
       RequestInterface $request,
       $mimeType,
       $data,
@@ -153,7 +153,7 @@ class Google_Http_MediaFileUpload
   * Sends a PUT-Request to google drive and parses the response,
   * setting the appropiate variables from the response()
   *
-  * @param Google_Http_Request $httpRequest the Reuqest which will be send
+  * @param AcordTravel_Http_Request $httpRequest the Reuqest which will be send
   *
   * @return false|mixed false when the upload is unfinished or the decoded http response
   *
@@ -181,7 +181,7 @@ class Google_Http_MediaFileUpload
       return false;
     }
 
-    return Google_Http_REST::decodeHttpResponse($response, $this->request);
+    return AcordTravel_Http_REST::decodeHttpResponse($response, $this->request);
   }
 
   /**
@@ -325,7 +325,7 @@ class Google_Http_MediaFileUpload
     $error = "Failed to start the resumable upload (HTTP {$message})";
     $this->client->getLogger()->error($error);
 
-    throw new Google_Exception($error);
+    throw new AcordTravel_Exception($error);
   }
 
   private function transformToUploadUrl()

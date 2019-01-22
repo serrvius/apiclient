@@ -21,10 +21,10 @@
  * http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5
  *
  */
-class Google_Model implements ArrayAccess
+class AcordTravel_Model implements ArrayAccess
 {
   /**
-   * If you need to specify a NULL JSON value, use Google_Model::NULL_VALUE
+   * If you need to specify a NULL JSON value, use AcordTravel_Model::NULL_VALUE
    * instead - it will be replaced when converting to JSON with a real null.
    */
   const NULL_VALUE = "{}gapi-php-null";
@@ -174,7 +174,7 @@ class Google_Model implements ArrayAccess
    */
   private function getSimpleValue($value)
   {
-    if ($value instanceof Google_Model) {
+    if ($value instanceof AcordTravel_Model) {
       return $value->toSimpleObject();
     } else if (is_array($value)) {
       $return = array();
@@ -233,14 +233,14 @@ class Google_Model implements ArrayAccess
 
   /**
    * Verify if $obj is an array.
-   * @throws Google_Exception Thrown if $obj isn't an array.
+   * @throws AcordTravel_Exception Thrown if $obj isn't an array.
    * @param array $obj Items that should be validated.
    * @param string $method Method expecting an array as an argument.
    */
   public function assertIsArray($obj, $method)
   {
     if ($obj && !is_array($obj)) {
-      throw new Google_Exception(
+      throw new AcordTravel_Exception(
           "Incorrect parameter type passed to $method(). Expected an array."
       );
     }

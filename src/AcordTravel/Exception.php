@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 
-class Google_Exception extends Exception
+class AcordTravel_Exception extends Exception
 {
 }

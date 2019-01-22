@@ -24,7 +24,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Class to handle batched requests to the Google API service.
  */
-class Google_Http_Batch
+class AcordTravel_Http_Batch
 {
   const BATCH_PATH = 'batch';
 
@@ -39,7 +39,7 @@ class Google_Http_Batch
   /** @var array service requests to be executed. */
   private $requests = array();
 
-  /** @var Google_Client */
+  /** @var AcordTravel_Client */
   private $client;
 
   private $rootUrl;
@@ -47,7 +47,7 @@ class Google_Http_Batch
   private $batchPath;
 
   public function __construct(
-      Google_Client $client,
+      AcordTravel_Client $client,
       $boundary = false,
       $rootUrl = null,
       $batchPath = null
@@ -84,7 +84,7 @@ Content-ID: %s
 
 EOF;
 
-    /** @var Google_Http_Request $req */
+    /** @var AcordTravel_Http_Request $req */
     foreach ($this->requests as $key => $request) {
       $firstLine = sprintf(
           '%s %s HTTP/%s',
@@ -172,8 +172,8 @@ EOF;
           $key = $headers['content-id'];
 
           try {
-            $response = Google_Http_REST::decodeHttpResponse($response, $requests[$i-1]);
-          } catch (Google_Service_Exception $e) {
+            $response = AcordTravel_Http_REST::decodeHttpResponse($response, $requests[$i-1]);
+          } catch (AcordTravel_Service_Exception $e) {
             // Store the exception as the response, so successful responses
             // can be processed.
             $response = $e;

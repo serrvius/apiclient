@@ -36,7 +36,7 @@ use Monolog\Handler\SyslogHandler as MonologSyslogHandler;
  * The Google API Client
  * https://github.com/google/google-api-php-client
  */
-class Google_Client
+class AcordTravel_Client
 {
   const LIBVER = "2.2.2";
   const USER_AGENT_SUFFIX = "google-api-php-client/";
@@ -128,7 +128,7 @@ class Google_Client
           'approval_prompt' => 'auto',
 
           // Task Runner retry configuration
-          // @see Google_Task_Runner
+          // @see AcordTravel_Task_Runner
           'retry' => array(),
           'retry_map' => null,
 
@@ -139,7 +139,7 @@ class Google_Client
           // follows the signature function ($cacheKey, $accessToken)
           'token_callback' => null,
 
-          // Service class used in Google_Client::verifyIdToken.
+          // Service class used in AcordTravel_Client::verifyIdToken.
           // Explicitly pass this in to avoid setting JWT::$leeway
           'jwt' => null,
         ],
@@ -219,9 +219,9 @@ class Google_Client
     if (!$this->isUsingApplicationDefaultCredentials()) {
       throw new DomainException(
           'set the JSON service account credentials using'
-          . ' Google_Client::setAuthConfig or set the path to your JSON file'
+          . ' AcordTravel_Client::setAuthConfig or set the path to your JSON file'
           . ' with the "GOOGLE_APPLICATION_CREDENTIALS" environment variable'
-          . ' and call Google_Client::useApplicationDefaultCredentials to'
+          . ' and call AcordTravel_Client::useApplicationDefaultCredentials to'
           . ' refresh a token with assertion.'
       );
     }
@@ -686,7 +686,7 @@ class Google_Client
    */
   public function revokeToken($token = null)
   {
-    $tokenRevoker = new Google_AccessToken_Revoke(
+    $tokenRevoker = new AcordTravel_AccessToken_Revoke(
         $this->getHttpClient()
     );
 
@@ -704,7 +704,7 @@ class Google_Client
    */
   public function verifyIdToken($idToken = null)
   {
-    $tokenVerifier = new Google_AccessToken_Verify(
+    $tokenVerifier = new AcordTravel_AccessToken_Verify(
         $this->getHttpClient(),
         $this->getCache(),
         $this->config['jwt']
@@ -782,8 +782,8 @@ class Google_Client
   /**
    * Helper method to execute deferred HTTP requests.
    *
-   * @param $request Psr\Http\Message\RequestInterface|Google_Http_Batch
-   * @throws Google_Exception
+   * @param $request Psr\Http\Message\RequestInterface|AcordTravel_Http_Batch
+   * @throws AcordTravel_Exception
    * @return object of the type of the expected class or Psr\Http\Message\ResponseInterface.
    */
   public function execute(RequestInterface $request, $expectedClass = null)
@@ -799,7 +799,7 @@ class Google_Client
     // this is where most of the grunt work is done
     $http = $this->authorize();
 
-    return Google_Http_REST::execute(
+    return AcordTravel_Http_REST::execute(
         $http,
         $request,
         $expectedClass,
@@ -846,7 +846,7 @@ class Google_Client
    * alias for setAuthConfig
    *
    * @param string $file the configuration file
-   * @throws Google_Exception
+   * @throws AcordTravel_Exception
    * @deprecated
    */
   public function setAuthConfigFile($file)
@@ -860,7 +860,7 @@ class Google_Client
    * the "Download JSON" button on in the Google Developer
    * Console.
    * @param string|array $config the configuration json
-   * @throws Google_Exception
+   * @throws AcordTravel_Exception
    */
   public function setAuthConfig($config)
   {
@@ -1117,7 +1117,7 @@ class Google_Client
     // sessions.
     //
     // @see https://github.com/google/google-api-php-client/issues/821
-    return Google_AuthHandler_AuthHandlerFactory::build(
+    return AcordTravel_AuthHandler_AuthHandlerFactory::build(
         $this->getCache(),
         $this->config['cache_config']
     );

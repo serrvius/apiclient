@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-class Google_Service_Exception extends Google_Exception
+class AcordTravel_Service_Exception extends AcordTravel_Exception
 {
   /**
    * Optional list of errors returned in a JSON body of an HTTP error response.

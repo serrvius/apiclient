@@ -18,12 +18,12 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
-class Google_AuthHandler_AuthHandlerFactory
+class AcordTravel_AuthHandler_AuthHandlerFactory
 {
   /**
    * Builds out a default http handler for the installed version of guzzle.
    *
-   * @return Google_AuthHandler_Guzzle5AuthHandler|Google_AuthHandler_Guzzle6AuthHandler
+   * @return AcordTravel_AuthHandler_Guzzle5AuthHandler|AcordTravel_AuthHandler_Guzzle6AuthHandler
    * @throws Exception
    */
   public static function build($cache = null, array $cacheConfig = [])
@@ -32,9 +32,9 @@ class Google_AuthHandler_AuthHandlerFactory
 
     switch ($version[0]) {
       case '5':
-        return new Google_AuthHandler_Guzzle5AuthHandler($cache, $cacheConfig);
+        return new AcordTravel_AuthHandler_Guzzle5AuthHandler($cache, $cacheConfig);
       case '6':
-        return new Google_AuthHandler_Guzzle6AuthHandler($cache, $cacheConfig);
+        return new AcordTravel_AuthHandler_Guzzle6AuthHandler($cache, $cacheConfig);
       default:
         throw new Exception('Version not supported');
     }

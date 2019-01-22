@@ -1,14 +1,13 @@
 {
-    "name": "google/apiclient",
+    "name": "serrvius/apiclient",
     "type": "library",
-    "description": "Client library for Google APIs",
-    "keywords": ["google"],
-    "homepage": "http://developers.google.com/api-client-library/php",
+    "description": "Client library base on Google APIs",
+    "keywords": ["google", "serrvius", "apiclient"],
+    "homepage": "https://github.com/serrvius/apiclient",
     "license": "Apache-2.0",
     "require": {
         "php": ">=5.4",
         "google/auth": "^1.0",
-        "google/apiclient-services": "~0.13",
         "firebase/php-jwt": "~2.0||~3.0||~4.0||~5.0",
         "monolog/monolog": "^1.17",
         "phpseclib/phpseclib": "~0.3.10||~2.0",
@@ -23,14 +22,14 @@
         "cache/filesystem-adapter": "^0.3.2"
     },
     "suggest": {
-        "cache/filesystem-adapter": "For caching certs and tokens (using Google_Client::setCache)"
+        "cache/filesystem-adapter": "For caching certs and tokens (using AcordTravel_Client::setCache)"
     },
     "autoload": {
         "psr-0": {
-            "Google_": "src/"
+            "AcordTravel_": "src/"
         },
         "classmap": [
-            "src/Google/Service/"
+            "src/AcordTravel/Service/"
         ]
     },
     "extra": {
